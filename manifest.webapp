@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "name": "LMIS",
+  "description": "Logistics Managment and Information System",
+  "launch_path": "index.html",
+  "icons":{
+
+  },
+  "developer":{
+    "name": "Suppliers"
+  },
+  "default_locale": "en",
+  "activities":{
+    "dhis":{
+      "href": "*"
+    }
+  }
+}
