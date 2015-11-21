@@ -18,9 +18,47 @@
       <div class="row">
         <div class="col-xs-12 col-sm-3" style="background-color:peachpuff">
           Left sidebar is for categories
+	  
+	  <div class="form-group">
+	    <label for="sel1"><h>Select commodity:</h></label>
+	    <select class="form-control" id="sel1">
+	      <option>Bed Nets</option>
+	      <option>Emergency Contraception</option>
+	      <option>Injectable Antibiotics</option>
+	    </select>
+	  </div>
         </div>
         <div class="col-xs-12 col-sm-6" style="background-color:plum">
           Center is for content
+	  <h1>Commodity Order Form</h1>	
+	  <form class="form-horizontal" role="form">
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="com1">Selected commodity:</label>
+	      <div class="col-sm-10">
+		<input type="commodity" class="form-control" id="commodity1" placeholder="Enter amount">
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="com2">Selected commodity:</label>
+	      <div class="col-sm-10"> 
+		<input type="commodity" class="form-control" id="commodity2" placeholder="Enter amount">
+	      </div>
+	    </div>
+
+
+	    <div class="container">
+	      <p>
+		<a href="#" class="btn btn-info btn-lg">
+		  <span class="glyphicon glyphicon-plus"></span> 
+		</a>
+	      </p>     
+	    </div>
+	    <div class="form-group"> 
+	      <div class="col-sm-offset-2 col-sm-10">
+		<button type="submit" class="btn btn-default">Submit</button>
+	      </div>
+	</div>
+</form>
         </div>
         <div class="col-xs-12 col-sm-3" style="background-color:tomato">
           Right sidebar is for ongoing order
