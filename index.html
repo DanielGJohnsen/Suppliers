@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="Suppliers">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" href="assets/css/style.css">
   <link type="text/css" rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+  <title>Suppliers</title>
 </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -45,9 +47,24 @@
           <h4>Content</h4>
           <div class="list-group">
             <li class="list-group-item">
-              <h4>A item</h4>
-              <p> Info about the item </p>
-              <button class="btn btn-default">Add to basket</button>
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <h4>A item</h4>
+                  <a href="#">More info <span class="glyphicon glyphicon-chevron-down"></span> </a>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="button" onclick="decrementValue()">-</button>
+                    </div>
+                    <input type="text" class="form-control" id="item" placeholder="Amount" value="1">
+                    <div class="input-group-btn">
+                      <button class="btn btn-default" type="button" onclick="incrementValue()" >+</button>
+                      <button class="btn btn-default" type="button">Add to basket</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </li>
             <li class="list-group-item">
               <h4>A item</h4>
@@ -176,4 +193,8 @@
   <script type="text/javascript" src="assets/js/jquery-1.11.3.js"></script>
   <script type="text/javascript" src="assets/js/main.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/angular.min.js"></script>
+
+  <script type="text/javascript" src="assets/js/app.js"></script>
+  <script type="text/javascript" src="assets/js/appController.js"></script>
 </html>

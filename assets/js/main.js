@@ -1,5 +1,3 @@
-
-
 $(function()
 {
     $(document).on('click', '.btn-add', function(e)
@@ -23,3 +21,21 @@ $(function()
 		return false;
 	});
 });
+
+function incrementValue() {
+  var value = parseInt(document.getElementById('item').value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('item').value = value;
+}
+
+function decrementValue() {
+  if((document.getElementById('item').value) == 0) {
+  }
+  else {
+    var value = parseInt(document.getElementById('item').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value--;
+    document.getElementById('item').value = value;
+  }
+}
