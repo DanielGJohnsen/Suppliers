@@ -1,0 +1,1 @@
+var app = angular.modoule(Suppliers);
