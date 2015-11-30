@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 
-<html ng-app="Suppliers">
+<html ng-app="suppliers">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" href="assets/css/style.css">
   <link type="text/css" rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -11,177 +13,134 @@
   <title>Suppliers</title>
 </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Suppliers</a>
-        <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-lable="Profile"></span> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Log out</a></li>
-          </ul>
-        </li>
-      </ul>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
-          <h4>Categories</h4>
-          <div class="list-grpup">
-            <button type="button" class="list-group-item">Category one</button>
-            <button type="button" class="list-group-item">Category two</button>
-            <button type="button" class="list-group-item">Category three</button>
-            <button type="button" class="list-group-item">Category four</button>
-            <button type="button" class="list-group-item">Category five</button>
-            <button type="button" class="list-group-item">Category six</button>
-            <button type="button" class="list-group-item">Category seven</button>
-          </div>
+    <div ng-controller="suppliersController" ng-init="init()">
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Suppliers</a>
+          <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-lable="Profile"></span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
         </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <h4>Categories</h4>
+            <div class="custom-collapse">
+              <button class="collapse-toggle visible-xs btn btn-default btn-lg btn-block" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse">
+                Show/hide categories <span class="glyphicon glyphicon-menu-hamburger"></span>
+              </button>
+              <div class="list-group collapse" id="side-menu-collapse">
+                <a ng-click="changeCategory(0)" href="#" class="list-group-item light-grey">Alle kategorier</a>
+                <a ng-repeat="category in categories" ng-click="changeCategory(category.id)" href="#" class="list-group-item">
+                  {{ category.name }}
+                </a>
+              </div>
+            </div>
+          </div>
 
-        <div class="col-xs-12 col-sm-6">
-          <h4>Content</h4>
-          <div class="list-group">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                  <h4>A item</h4>
-                  <a href="#">More info <span class="glyphicon glyphicon-chevron-down"></span> </a>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                  <div class="input-group">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default" type="button" onclick="decrementValue()">-</button>
-                    </div>
-                    <input type="text" class="form-control" id="item" placeholder="Amount" value="1">
-                    <div class="input-group-btn">
-                      <button class="btn btn-default" type="button" onclick="incrementValue()" >+</button>
-                      <button class="btn btn-default" type="button">Add to basket</button>
+          <div class="col-xs-12 col-sm-6">
+            <h4>Content</h4>
+            <div class="list-group">
+              <li class="list-group-item" ng-repeat="item in items">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <h4>{{ item.name }}</h4>
+
+                    <a href="" ng-click="moreInfo=true">More info <span class="glyphicon glyphicon-chevron-down"></span> </a>
+                    <p ng-show="moreInfo">
+                      {{ item.product_info }}<br>
+                      <a href="" ng-click="moreInfo=false">Less info <span class="glyphicon glyphicon-chevron-up"></span> </a>
+                    </p>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="decrementValue()">-</button>
+                      </div>
+                      <input type="text" class="form-control" id="item" placeholder="Amount" value="1">
+                      <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="incrementValue()" >+</button>
+                        <button class="btn btn-default" type="button">Add to basket</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </li>
+
+            </div>
+
+        	</div>
+
+          <div class="col-xs-12 col-sm-3">
+            <h4>Basket</h4>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>#</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Item one</td>
+                      <td>5</td>
+                      <td>
+                      </td>
+                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                    </tr>
+                    <tr>
+                      <td>Item two</td>
+                      <td>1</td>
+                      <td>
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      </td>
+                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                    </tr>
+                    <tr>
+                      <td>Item three</td>
+                      <td>9</td>
+                      <td>
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      </td>
+                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                    </tr>
+                    <tr>
+                      <td>Item four</td>
+                      <td>2</td>
+                      <td>
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      </td>
+                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                    </tr>
+                    <tr>
+                      <td>Item five</td>
+                      <td>7</td>
+                      <td>
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      </td>
+                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </li>
-            <li class="list-group-item">
-              <h4>A item</h4>
-              <p> Info about the item </p>
-              <button class="btn btn-default">Add to basket</button>
-            </li>
-            <li class="list-group-item">
-              <h4>A item</h4>
-              <p> Info about the item </p>
-              <button class="btn btn-default">Add to basket</button>
-            </li>
-
-          </div>
-
-
-      	  <!--<h1>Commodity Order Form</h1>
-      	  <div class="container">
-      	    <div class="row">
-      	      <div class="control-group" id="fields">
-      		<div class="controls">
-      		  <form role="form" autocomplete="off">
-      		    <div class="entry input-group col-xs-5">
-      		      <div class="col-xs-8">
-      			<select class="form-control">
-      			  <option>Commodity 1</option>
-      			  <option>Commodity 2</option>
-      			  <option>Commodity 3</option>
-      			</select>
-      		      </div>
-
-      		      <div class="col-xs-4">
-      			<input type="text" class="form-control">
-      		      </div>
-
-      		      <span class="input-group-btn">
-      			<button class="btn btn-success btn-add" type="button">
-      			  <span class="glyphicon glyphicon-plus"></span>
-      			</button>
-      		      </span>
-      		    </div>
-      		  </form>
-      		</div>
-      	      </div>
-      	    </div>
-      	  </div>
-      	  <br>
-
-      	  <div class="form-group">
-      	    <div class="col-sm-offset-2 col-sm-10">
-      	      <button type="submit" class="btn btn-default">Send Order</button>
-      	    </div>
-      	  </div>
-      	  <br> <br>-->
-
-      	</div>
-
-        <div class="col-xs-12 col-sm-3">
-          <h4>Basket</h4>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>#</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Item one</td>
-                    <td>5</td>
-                    <td>
-                      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </td>
-                    <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Item two</td>
-                    <td>1</td>
-                    <td>
-                      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </td>
-                    <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Item three</td>
-                    <td>9</td>
-                    <td>
-                      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </td>
-                    <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Item four</td>
-                    <td>2</td>
-                    <td>
-                      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </td>
-                    <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Item five</td>
-                    <td>7</td>
-                    <td>
-                      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </td>
-                    <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
@@ -194,7 +153,8 @@
   <script type="text/javascript" src="assets/js/main.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-mocks.js"></script>
 
   <script type="text/javascript" src="assets/js/app.js"></script>
-  <script type="text/javascript" src="assets/js/appController.js"></script>
+  <script type="text/javascript" src="assets/js/suppliersController.js"></script>
 </html>
