@@ -1,21 +1,23 @@
-body{
+body {
   background-color: white;
 }
 
-.cube{
+.cube {
   height: 100px;
   width: 100px;
   background-color: green;
 }
 
-.entry:not(:first-of-type)
-{
+.entry:not(:first-of-type) {
     margin-top: 10px;
 }
 
-.glyphicon
-{
+.glyphicon {
     font-size: 12px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

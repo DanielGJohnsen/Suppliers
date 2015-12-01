@@ -1,4 +1,4 @@
-var app = angular.module('suppliers', ['ngMockE2E'])
+var app = angular.module('suppliers', ['ngCookies', 'ngMockE2E'])
   .run(function ($httpBackend) {
     $httpBackend.whenGET('/api/category').respond([
       {id:1, name:"Applicators"}, {id:2, name:"Bandages"},
@@ -6,6 +6,7 @@ var app = angular.module('suppliers', ['ngMockE2E'])
       {id:7, name:"Electrode Prep"}, {id:8, name:"Fistula Needles"}, {id:9, name:"Gauze"}, {id:10, name:"Gloves"},
       {id:11, name:"Lubricating Gel"}, {id:12, name:"Scalpels and Handles"}, {id:13, name:"Syringes"},
       {id:14, name:"Urine Specimen Cups"}]);
+
     $httpBackend.whenGET('/api/item').respond([
       {id:1, item_code:"25-800-A-50", name:"Miniature Tip Calcium Alginate Applicator", product_info:"Miniature Tip Calcium Alginate Applicator, Sterile. 5.5 Aluminum Shaft with Nasopharyngeal End.Quantity: 500", category_id:1},
       {id:2, item_code:"25-3306-U-TT-FDNA", name:"DNA Free Flock Tip Swab with Transport Tube", product_info:"DNA Free Flock Tip Swab with Transport Tube, Sterile. 6 in Polystyrene Shaft w/ Breakpoint at 80 mm. Quantity: 500", category_id:1},

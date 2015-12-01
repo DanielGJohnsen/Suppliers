@@ -65,12 +65,12 @@
                   <div class="col-xs-12 col-sm-6">
                     <div class="input-group">
                       <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" onclick="decrementValue()">-</button>
+                        <button class="btn btn-default" type="button" ng-click="decrementValue(item)">-</button>
                       </div>
-                      <input type="text" class="form-control" id="item" placeholder="Amount" value="1">
+                      <input type="text" class="form-control" ng-model="item.amount" placeholder="Amount" value="1">
                       <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" onclick="incrementValue()" >+</button>
-                        <button class="btn btn-default" type="button">Add to basket</button>
+                        <button class="btn btn-default" type="button" ng-click="incrementValue(item)" >+</button>
+                        <button class="btn btn-default" ng-click="addToBasket(item)" type="button">Add to basket</button>
                       </div>
                     </div>
                   </div>
@@ -81,7 +81,7 @@
 
         	</div>
 
-          <div class="col-xs-12 col-sm-3">
+          <div class="col-xs-12 col-sm-3" ng-controller="basketController">
             <h4>Basket</h4>
             <div class="panel panel-default">
               <div class="panel-body">
@@ -95,48 +95,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Item one</td>
-                      <td>5</td>
+                    <tr ng-repeat="item in basket">
+                      <td>{{item.name}}</td>
+                      <td>{{item.amount}}</td>
                       <td>
+                        <span class="glyphicon glyphicon-minus-sign pointer" aria-hidden="true" ng-click="decrementInBasket(item.id)"></span>
+                        <span class="glyphicon glyphicon-plus-sign pointer" aria-hidden="true" ng-click="incrementInBasket(item.id)"></span>
                       </td>
-                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Item two</td>
-                      <td>1</td>
-                      <td>
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      </td>
-                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Item three</td>
-                      <td>9</td>
-                      <td>
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      </td>
-                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Item four</td>
-                      <td>2</td>
-                      <td>
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      </td>
-                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Item five</td>
-                      <td>7</td>
-                      <td>
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      </td>
-                      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></td>
+                      <td><span class="glyphicon glyphicon-remove-sign pointer" aria-hidden="true" ng-click="removeFromBasket(item.id)"></span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -153,8 +119,12 @@
   <script type="text/javascript" src="assets/js/main.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="assets/js/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-mocks.js"></script>
 
   <script type="text/javascript" src="assets/js/app.js"></script>
+  <script type="text/javascript" src="assets/js/basket.js"></script>
   <script type="text/javascript" src="assets/js/suppliersController.js"></script>
+  <script type="text/javascript" src="assets/js/basketController.js"></script>
+
 </html>

@@ -1,4 +1,4 @@
-app.controller('suppliersController', function ($scope, $http, $timeout) {
+app.controller('suppliersController', function ($scope, $http, $timeout, basket) {
 
 	$scope.activeCategory = 0;
 
@@ -24,6 +24,9 @@ app.controller('suppliersController', function ($scope, $http, $timeout) {
 
 		$http.get('/api/item').
 			success(function (data, status, headers, config) {
+				data.forEach(function(item) {
+					item.amount = 1;
+				});
 				allItems = data;
 				$scope.items = data;
 			}).
@@ -57,7 +60,18 @@ app.controller('suppliersController', function ($scope, $http, $timeout) {
 	 * Basket
 	 */
 
-	 // do somthing with this: https://docs.angularjs.org/guide/services
+	 $scope.addToBasket = function(item) {
+		 basket.add(item);
+	 }
 
+	 $scope.incrementValue = function(item) {
+		 item.amount++;
+	 }
+
+	 $scope.decrementValue = function(item) {
+		 if(item.amount > 1) {
+ 		 	item.amount--;
+		 }
+	 }
 
 });
