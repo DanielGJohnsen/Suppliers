@@ -44,17 +44,43 @@ app.factory('basket', function($cookies) {
       });
 
       $cookies.putObject('basket', basket);
+
+            console.log(basket);
     },
 
     remove: function(id) {
       for(var i = 0; i < basket.length; i++) {
-        if(basket[i].id === id) {
+        if(basket[i].id === id ) {
           basket.splice(i,1);
         }
       }
 
       $cookies.putObject('basket', basket);
-    }
-  };
+    },
+
+  checkout: function(){
+    var commodities = "";
+    basket.forEach(function(item) {
+      commodities += item.name + " - " + item.amount + "\n";
+    });
+
+    var title = "User.name order"
+
+    var request = $.ajax({
+			  type: 'POST',
+			  url: 'https://play.dhis2.org/demo/api/messageConversations',
+			  dataType: 'json',
+			  username: 'admin',
+			  contentType: 'application/json',
+			  crossDomain: true,
+			  password: 'district',
+			  data: JSON.stringify({"subject": title, "text": commodities, "users": [ {"id": "PhzytPW3g2J"}]})
+			  });
+
+			  request.done(function(data) {
+			  console.log("Success!");
+			  });
+  }
+};
 
 });

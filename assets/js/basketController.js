@@ -14,4 +14,8 @@ app.controller('basketController', function ($scope, basket) {
     basket.remove(id);
   }
 
+  $scope.testbtn = function() {
+    basket.checkout();
+  }
+
 });

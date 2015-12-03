@@ -2,7 +2,7 @@
   "version": "0.1",
   "name": "LMIS",
   "description": "Logistics Managment and Information System",
-  "launch_path": "index.html",
+  "launch_path": "Suppliers/index.html",
   "icons":{
 
   },

@@ -31,13 +31,13 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
 				$scope.items = data;
 			}).
 				error(function (data, status, headers, config) {
-				console.log("Somthing went wrond");
+				console.log("Somthing went wrong");
 		});
 	};
 
 
 	/*
-	 * Change categoryls
+	 * Change categories
 	 */
 
 	$scope.changeCategory = function(id) {
@@ -65,12 +65,12 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
 	 }
 
 	 $scope.incrementValue = function(item) {
-		 item.amount++;
+		 item.amount+1;
 	 }
 
 	 $scope.decrementValue = function(item) {
 		 if(item.amount > 1) {
- 		 	item.amount--;
+ 		 	item.amount-1;
 		 }
 	 }
 
