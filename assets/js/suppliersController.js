@@ -1,6 +1,17 @@
-app.controller('suppliersController', function ($scope, $http, $timeout, basket) {
+app.controller('suppliersController', function ($scope, $http, $timeout, basket, users) {
 
 	$scope.activeCategory = 0;
+
+	$scope.customItem = false;
+	$scope.askCustomItem = true;
+
+	$scope.showCategories = true;
+	$scope.hideCategories = false;
+
+	$scope.showMoreInfo = true;
+	$scope.hideMoreInfo = false;
+
+	$scope.moreInfo = false;
 
 	$scope.categories = [];
 
@@ -8,12 +19,27 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
 	$scope.items = [];
 
 	$scope.basket = [];
+	$scope.users = [];
 
 	/*
 	 * Load data
 	 */
 
 	$scope.init = function () {
+		users.getAllUsers(function (data) {
+			console.log(data);
+			$scope.users = data.users;
+		});
+
+		/*
+		$http.get('https://play.dhis2.org/demo/api/users')
+		 .success(function (data) {
+			 console.log("success", data);
+		 })
+		 .error(function (data) {
+			 console.log("fail", data);
+		 });
+
 		$http.get('/api/category').
 			success(function (data, status, headers, config) {
 				$scope.categories = data;
@@ -33,12 +59,24 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
 				error(function (data, status, headers, config) {
 				console.log("Somthing went wrong");
 		});
+*/
 	};
 
 
 	/*
 	 * Change categories
 	 */
+
+	$scope.showHideCategories = function() {
+		if($scope.showCategories) {
+			$scope.showCategories = false;
+			$scope.hideCategories = true;
+		} else {
+			$scope.showCategories = true;
+			$scope.hideCategories = false;
+		}
+
+	}
 
 	$scope.changeCategory = function(id) {
 		$scope.activeCategory = id;
@@ -53,6 +91,22 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
 					$scope.items.push(allItems[i]);
 				}
 			}
+		}
+	}
+
+	/*
+	 *
+	 */
+
+	$scope.toggleMoreInfo = function(item) {
+		if($scope.showMoreInfo) {
+			$scope.showMoreInfo = false;
+			$scope.hideMoreInfo = true;
+			$scope.moreInfo = true;
+		} else {
+			$scope.showMoreInfo = true;
+			$scope.hideMoreInfo = false;
+			$scope.moreInfo = false;
 		}
 	}
 
@@ -73,5 +127,32 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket)
  		 	item.amount-1;
 		 }
 	 }
+
+	 /*
+	  * Add custom item
+		*/
+
+	 $scope.toggleCustomItem = function() {
+		 if($scope.customItem) {
+			 $scope.askCustomItem = true;
+			 $scope.customItem = false;
+		 } else {
+			 $scope.customItem = true;
+			 $scope.askCustomItem = false;
+		 }
+	 }
+
+	 $scope.closeCustomItem = function() {
+		 $scope.customItem = false;
+		 $scope.askCustomItem = true;
+	 }
+
+	 /*
+	 	* Users
+		*/
+
+
+
+
 
 });

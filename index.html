@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="assets/lib/css/font-awesome.min.css">
   <link type="text/css" rel="stylesheet" href="assets/css/style.css">
-  <link type="text/css" rel="stylesheet" href="assets/css/font-awesome.min.css">
+
 
   <title>Suppliers</title>
 </head>
@@ -17,114 +18,41 @@
       <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
           <a class="navbar-brand" href="#">Suppliers</a>
-          <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-lable="Profile"></span> <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Log out</a></li>
-            </ul>
-          </li>
-        </ul>
         </div>
       </nav>
+
       <div class="container">
+
+        <ng-include src="'views/customCommodity.html'"></ng-include>
+
         <div class="row">
           <div class="col-xs-12 col-sm-3">
-            <h4>Categories</h4>
-            <div class="custom-collapse">
-              <button class="collapse-toggle visible-xs btn btn-default btn-lg btn-block" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse">
-                Show/hide categories <span class="glyphicon glyphicon-menu-hamburger"></span>
-              </button>
-              <div class="list-group collapse" id="side-menu-collapse">
-                <a ng-click="changeCategory(0)" href="#" class="list-group-item light-grey">Alle kategorier</a>
-                <a ng-repeat="category in categories" ng-click="changeCategory(category.id)" href="#" class="list-group-item">
-                  {{ category.name }}
-                </a>
-              </div>
-            </div>
+            <ng-include src="'views/categories.html'"></ng-include>
           </div>
 
           <div class="col-xs-12 col-sm-6">
-            <h4>Content</h4>
-            <div class="list-group">
-              <li class="list-group-item" ng-repeat="item in items">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-6">
-                    <h4>{{ item.name }}</h4>
-
-                    <a href="" ng-click="moreInfo=true">More info <span class="glyphicon glyphicon-chevron-down"></span> </a>
-                    <p ng-show="moreInfo">
-                      {{ item.product_info }}<br>
-                      <a href="" ng-click="moreInfo=false">Less info <span class="glyphicon glyphicon-chevron-up"></span> </a>
-                    </p>
-                  </div>
-                  <div class="col-xs-12 col-sm-6">
-                    <div class="input-group">
-                      <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="decrementValue(item)">-</button>
-                      </div>
-                      <input type="text" class="form-control" ng-model="item.amount" placeholder="Amount" value="1">
-                      <div class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="incrementValue(item)" >+</button>
-                        <button class="btn btn-default" ng-click="addToBasket(item)" type="button">Add to basket</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-
-            </div>
-
+            <ng-include src="'views/content.html'"></ng-include>
         	</div>
 
-          <div class="col-xs-12 col-sm-3" ng-controller="basketController">
-            <h4>Basket</h4>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Item</th>
-                      <th>#</th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="item in basket">
-                      <td>{{item.name}}</td>
-                      <td>{{item.amount}}</td>
-                      <td>
-                        <span class="glyphicon glyphicon-minus-sign pointer" aria-hidden="true" ng-click="decrementInBasket(item.id)"></span>
-                      <span class="glyphicon glyphicon-plus-sign pointer" aria-hidden="true" ng-click="incrementInBasket(item.id)"></span>
-                      </td>
-                      <td><span class="glyphicon glyphicon-remove-sign pointer" aria-hidden="true" ng-click="removeFromBasket(item.id)"></span></td>
-                    </tr>
-                  </tbody>
-                </table>
-                  <button class="btn btn-default" ng-click="testbtn()" type="button">Order dat shit</button>
-              </div>
-            </div>
+          <div class="col-xs-12 col-sm-3">
+            <ng-include src="'views/basket.html'"></ng-include>
           </div>
+
         </div>
       </div>
     </div>
 
   </body>
 
-  <script type="text/javascript" src="assets/js/jquery-1.11.3.js"></script>
-  <script type="text/javascript" src="assets/js/main.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/js/angular.min.js"></script>
-  <script type="text/javascript" src="assets/js/angular-cookies.js"></script>
-  <script type="text/javascript" src="assets/js/angular-mocks.js"></script>
+  <script type="text/javascript" src="assets/lib/js/jquery-1.11.3.js"></script>
+  <script type="text/javascript" src="assets/lib/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/lib/js/angular.min.js"></script>
+  <script type="text/javascript" src="assets/lib/js/angular-cookies.js"></script>
+  <script type="text/javascript" src="assets/lib/js/angular-mocks.js"></script>
 
   <script type="text/javascript" src="assets/js/app.js"></script>
   <script type="text/javascript" src="assets/js/basket.js"></script>
+  <script type="text/javascript" src="assets/js/users.js"></script>
   <script type="text/javascript" src="assets/js/suppliersController.js"></script>
   <script type="text/javascript" src="assets/js/basketController.js"></script>
 

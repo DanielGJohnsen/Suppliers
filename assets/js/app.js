@@ -1,5 +1,177 @@
-var app = angular.module('suppliers', ['ngCookies', 'ngMockE2E'])
-  .run(function ($httpBackend) {
+var app = angular.module('suppliers', ['ngCookies']);/*
+  .run(function ($httpBackend, $window) {
+
+    // IF PRODUCTION, DO NOTHING
+    if ($window.location.host === "play.dhis2.org") {
+      return;
+    }
+
+    $httpBackend.whenGET('https://play.dhis2.org/demo/api/users').respond(
+      {
+  "pager": {
+    "page": 1,
+    "pageCount": 1,
+    "total": 22
+  },
+  "users": [
+    {
+      "lastUpdated": "2015-12-08T17:29:39.716+0000",
+      "created": "2015-10-19T12:46:51.527+0000",
+      "name": "admin admin",
+      "id": "wj0nnd9Lo0M",
+      "href": "https://play.dhis2.org/demo/api/users/wj0nnd9Lo0M"
+    },
+    {
+      "lastUpdated": "2015-12-08T06:49:42.518+0000",
+      "created": "2015-03-31T13:31:09.324+0000",
+      "name": "John Barnes",
+      "id": "DXyJmlo9rge",
+      "href": "https://play.dhis2.org/demo/api/users/DXyJmlo9rge"
+    },
+    {
+      "lastUpdated": "2015-08-03T12:08:25.162+0000",
+      "created": "2013-03-11T17:43:05.695+0000",
+      "name": "Kevin Boateng",
+      "id": "OYLGMiazHtW",
+      "href": "https://play.dhis2.org/demo/api/users/OYLGMiazHtW"
+    },
+    {
+      "lastUpdated": "2015-12-08T03:43:26.437+0000",
+      "created": "2015-12-08T03:40:26.867+0000",
+      "name": "julie bowen",
+      "id": "be2C1SRiUYk",
+      "href": "https://play.dhis2.org/demo/api/users/be2C1SRiUYk"
+    },
+    {
+      "lastUpdated": "2015-12-08T17:16:00.628+0000",
+      "created": "2015-12-08T17:16:00.628+0000",
+      "name": "Mathias Ciarlo",
+      "id": "JtpTPkjVcal",
+      "href": "https://play.dhis2.org/demo/api/users/JtpTPkjVcal"
+    },
+    {
+      "lastUpdated": "2013-03-21T16:45:07.421+0000",
+      "created": "2013-03-11T17:52:44.911+0000",
+      "name": "Suleimane Diawara",
+      "id": "awtnYWiVEd5",
+      "href": "https://play.dhis2.org/demo/api/users/awtnYWiVEd5"
+    },
+    {
+      "lastUpdated": "2013-11-13T11:58:59.849+0000",
+      "created": "2013-11-06T14:42:14.579+0000",
+      "name": "Bombali District",
+      "id": "NOOF56dveaZ",
+      "href": "https://play.dhis2.org/demo/api/users/NOOF56dveaZ"
+    },
+    {
+      "lastUpdated": "2013-03-22T11:46:46.706+0000",
+      "created": "2012-11-13T15:38:48.822+0000",
+      "name": "John Kamara",
+      "id": "N3PZBUlN8vq",
+      "href": "https://play.dhis2.org/demo/api/users/N3PZBUlN8vq"
+    },
+    {
+      "lastUpdated": "2015-03-25T18:35:54.155+0000",
+      "created": "2013-03-11T17:45:16.834+0000",
+      "name": "Seydou Keita",
+      "id": "Onf73mPD6sL",
+      "href": "https://play.dhis2.org/demo/api/users/Onf73mPD6sL"
+    },
+    {
+      "lastUpdated": "2015-03-12T10:27:16.363+0000",
+      "created": "2013-03-11T17:44:11.762+0000",
+      "name": "Didier Konan",
+      "id": "I9fMsY4pRKk",
+      "href": "https://play.dhis2.org/demo/api/users/I9fMsY4pRKk"
+    },
+    {
+      "lastUpdated": "2015-12-08T08:46:39.188+0000",
+      "created": "2015-12-08T08:28:22.974+0000",
+      "name": "Darshan Kumar",
+      "id": "TBu2keALScC",
+      "href": "https://play.dhis2.org/demo/api/users/TBu2keALScC"
+    },
+    {
+      "lastUpdated": "2013-03-20T22:38:45.053+0000",
+      "created": "2013-03-11T17:57:16.501+0000",
+      "name": "Roger Milla",
+      "id": "ObaborECU7w",
+      "href": "https://play.dhis2.org/demo/api/users/ObaborECU7w"
+    },
+    {
+      "lastUpdated": "2013-05-29T16:54:33.308+0000",
+      "created": "2012-11-13T16:08:22.136+0000",
+      "name": "User Mobile",
+      "id": "PhzytPW3g2J",
+      "href": "https://play.dhis2.org/demo/api/users/PhzytPW3g2J"
+    },
+    {
+      "lastUpdated": "2015-03-12T10:33:50.471+0000",
+      "created": "2013-03-11T17:55:23.166+0000",
+      "name": "Thomas Nkono",
+      "id": "QqvaU7JjkUV",
+      "href": "https://play.dhis2.org/demo/api/users/QqvaU7JjkUV"
+    },
+    {
+      "lastUpdated": "2013-03-20T21:39:20.449+0000",
+      "created": "2013-03-11T17:56:37.945+0000",
+      "name": "Kanu Nwankwo",
+      "id": "UgDpalMTGDr",
+      "href": "https://play.dhis2.org/demo/api/users/UgDpalMTGDr"
+    },
+    {
+      "lastUpdated": "2013-03-20T21:39:30.345+0000",
+      "created": "2013-03-11T17:45:51.324+0000",
+      "name": "Yaya Toure",
+      "id": "yI9qQfuM7Xd",
+      "href": "https://play.dhis2.org/demo/api/users/yI9qQfuM7Xd"
+    },
+    {
+      "lastUpdated": "2014-10-07T22:17:04.940+0000",
+      "created": "2013-03-11T17:51:41.232+0000",
+      "name": "Alain Traore",
+      "id": "oXD88WWSQpR",
+      "href": "https://play.dhis2.org/demo/api/users/oXD88WWSQpR"
+    },
+    {
+      "lastUpdated": "2014-04-08T21:07:47.287+0000",
+      "created": "2014-04-08T21:07:35.514+0000",
+      "name": "Donor User",
+      "id": "cddnwKV2gm9",
+      "href": "https://play.dhis2.org/demo/api/users/cddnwKV2gm9"
+    },
+    {
+      "lastUpdated": "2014-10-07T22:17:43.562+0000",
+      "created": "2014-10-07T22:17:43.562+0000",
+      "name": "Guest User",
+      "id": "rWLrZL8rP3K",
+      "href": "https://play.dhis2.org/demo/api/users/rWLrZL8rP3K"
+    },
+    {
+      "lastUpdated": "2015-10-22T17:01:11.881+0000",
+      "created": "2013-10-16T14:23:56.148+0000",
+      "name": "Portal User",
+      "id": "qDNQJROsrzY",
+      "href": "https://play.dhis2.org/demo/api/users/qDNQJROsrzY"
+    },
+    {
+      "lastUpdated": "2013-03-06T12:12:00.197+0000",
+      "created": "2012-11-20T22:02:37.342+0000",
+      "name": "Tracker demo User",
+      "id": "AIK2aQOJIbj",
+      "href": "https://play.dhis2.org/demo/api/users/AIK2aQOJIbj"
+    },
+    {
+      "lastUpdated": "2015-10-19T10:27:27.567+0000",
+      "created": "2012-11-21T12:02:04.303+0000",
+      "name": "Tom Wakiki",
+      "id": "GOLswS44mh8",
+      "href": "https://play.dhis2.org/demo/api/users/GOLswS44mh8"
+    }
+  ]
+}
+    );
+
     $httpBackend.whenGET('/api/category').respond([
       {id:1, name:"Applicators"}, {id:2, name:"Bandages"},
       {id:3, name:"Biohazard Bags"}, {id:4, name:"Blades"}, {id:5, name:"Capes"}, {id:6, name:"Cleaning Brushes"},
@@ -59,3 +231,4 @@ var app = angular.module('suppliers', ['ngCookies', 'ngMockE2E'])
 
     ]);
   });
+*/

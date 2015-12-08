@@ -1,4 +1,4 @@
-app.factory('basket', function($cookies) {
+app.factory('basket', function($cookies, $http) {
   var basket = $cookies.getObject('basket') || [];
 
   return {
@@ -58,29 +58,34 @@ app.factory('basket', function($cookies) {
       $cookies.putObject('basket', basket);
     },
 
-  checkout: function(){
-    var commodities = "";
-    basket.forEach(function(item) {
-      commodities += item.name + " - " + item.amount + "\n";
-    });
+    checkout: function(){
+      var commodities = "";
 
-    var title = "User.name order"
+      basket.forEach(function(item) {
+        commodities += item.name + ": " + item.amount +
+                       " unit" + (item.amount > 1 ? "s" : "") + "\n";
+      });
 
-    var request = $.ajax({
-			  type: 'POST',
-			  url: 'https://play.dhis2.org/demo/api/messageConversations',
-			  dataType: 'json',
-			  username: 'admin',
-			  contentType: 'application/json',
-			  crossDomain: true,
-			  password: 'district',
-			  data: JSON.stringify({"subject": title, "text": commodities, "users": [ {"id": "PhzytPW3g2J"}]})
-			  });
+      if (window.location.host === "play.dhis2.org") {
+        $http.post('https://play.dhis2.org/demo/api/messageConversations', {
+          "subject": "Commodity order form submitted",
+          "text": commodities,
+          "users": [{"id": "PhzytPW3g2J"}]
+        }).
+        success(function (data) {
+          basket = {};
+     			$cookies.putObject('basket', basket);
+     		});
+      } else {
+        console.log("Would have POSTed this:", {
+          "subject": "Commodity order form submitted",
+          "text": commodities,
+          "users": [{"id": "PhzytPW3g2J"}]
+        });
+      }
 
-			  request.done(function(data) {
-			  console.log("Success!");
-			  });
-  }
-};
+
+    }
+  };
 
 });
