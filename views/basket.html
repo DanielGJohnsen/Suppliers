@@ -1,0 +1,29 @@
+<div ng-controller="basketController">
+  <h4>Basket</h4>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>#</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in basket">
+            <td>{{item.name}}</td>
+            <td>{{item.amount}}</td>
+            <td>
+              <span class="glyphicon glyphicon-minus-sign pointer" aria-hidden="true" ng-click="decrementInBasket(item.id)"></span>
+            <span class="glyphicon glyphicon-plus-sign pointer" aria-hidden="true" ng-click="incrementInBasket(item.id)"></span>
+            </td>
+            <td><span class="glyphicon glyphicon-remove-sign pointer" aria-hidden="true" ng-click="removeFromBasket(item.id)"></span></td>
+          </tr>
+        </tbody>
+      </table>
+        <button class="btn btn-default" ng-click="testbtn()" type="button">Order dat shit</button>
+    </div>
+  </div>
+</div>

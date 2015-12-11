@@ -1,0 +1,36 @@
+<div>
+  <div ng-show="askCustomItem">
+    <button type="button" class="btn btn-primary btn-block" ng-click="toggleCustomItem()" >Add custom item</button>
+  </div>
+  <div ng-show="customItem">
+    <button type="button" class="btn btn-default btn-block" ng-click="closeCustomItem()">Close add custom item</button>
+  </div>
+
+  <div ng-show="customItem">
+    <br />
+    <div class="panel panel-default" >
+      <div class="panel-body">
+        <form role="form" name="newItemForm">
+          <div class="form-group">
+            <label for="itemCode">Item code</label>
+            <input type="text" class="form-control" placeholder="Item code" ng-model="addItemForm" />
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-3">
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="decrementValue(item)">-</button>
+                </div>
+                <input type="text" class="form-control" ng-model="item.amount" placeholder="Amount" value="1" />
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="incrementValue(item)" >+</button>
+                  <button class="btn btn-default" ng-click="addToBasket(item)" type="button">Add to basket</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

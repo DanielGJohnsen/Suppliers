@@ -1,0 +1,31 @@
+<div>
+  <h4>Content</h4>
+  <div class="list-group">
+    <li class="list-group-item" ng-repeat="item in items">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h4>{{ item.name }}</h4>
+
+          <a role="button" data-toggle="collapse" href="#info{{item.id}}" aria-expanded="false" aria-controls="info{{item.id}}">Info</a>
+          <p class="collapse" id="info{{item.id}}">
+            {{ item.product_info }}<br />
+          </p>
+          <a href="" ng-click="toggleMoreInfo(item)" ng-show="hideMoreInfo">Less info <span class="glyphicon glyphicon-chevron-up"></span> </a>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="decrementValue(item)">-</button>
+            </div>
+            <input type="text" class="form-control" ng-model="item.amount" placeholder="Amount" value="1" />
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="incrementValue(item)" >+</button>
+              <button class="btn btn-default" ng-click="addToBasket(item)" type="button">Add to basket</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  </div>
+</div>

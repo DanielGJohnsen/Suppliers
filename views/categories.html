@@ -1,0 +1,21 @@
+<div>
+  <h4>Categories</h4>
+  <div class="custom-collapse">
+    <div ng-show="showCategories">
+      <button class="collapse-toggle visible-xs btn btn-default btn-block" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse" ng-click="showHideCategories()">
+        Show categories <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </button>
+    </div>
+    <div ng-show="hideCategories">
+      <button class="collapse-toggle visible-xs btn btn-default btn-block" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse" ng-click="showHideCategories()">
+        Hide categories <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </button>
+    </div>
+    <div class="list-group collapse" id="side-menu-collapse">
+      <a ng-click="changeCategory(0)" href="#" class="list-group-item light-grey">Alle kategorier</a>
+      <a ng-repeat="category in categories" ng-click="changeCategory(category.id)" href="#" class="list-group-item">
+        {{ category.name }}
+      </a>
+    </div>
+  </div>
+</div>
