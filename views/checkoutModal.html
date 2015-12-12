@@ -1,0 +1,49 @@
+<div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="checkoutModal">Checkout</h4>
+			</div>
+			<div class="modal-body">
+				<div ng-show="chooseDepPer">
+					<form>
+						<div class="form-group">
+							<label for="chooseDepartment">Choose the department you waht to send to</label>
+							<select class="form-control">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="choosePerson">Choose the person you waht to send to</label>
+							<select class="form-control">
+								<option ng-repeat="user in users">
+									{{user.name}}
+								</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div ng-show="confirm">
+					You will send a message for the order of this commodities:<br />
+					-- List of commodities --<br />
+					<br />
+					To: <br />
+					-- Name of department and person -- <br />
+					<br />
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button ng-show="chooseDepPer" type="button" ng-click="confirmOrder()" class="btn btn-primary">Next</button>
+				<button ng-show="confirm" type="button" ng-click="backToThePast()" class="btn btn-primary">Back</button>
+				<button ng-show="confirm" type="button" ng-click="checkoutOrder()" class="btn btn-success">Send order</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -2,8 +2,11 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 
 	$scope.activeCategory = 0;
 
-	$scope.customItem = false;
-	$scope.askCustomItem = true;
+	$scope.customCommodity = true;
+	$scope.addCustomCommodity = false;
+
+	$scope.chooseDepPer = true;
+	$scope.confirm = false;
 
 	$scope.showCategories = true;
 	$scope.hideCategories = false;
@@ -17,6 +20,13 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 
 	var allItems = [];
 	$scope.items = [];
+
+	$scope.commodity = [];
+
+	$scope.newCommodityForm = {
+        Name: "",
+        Amount: ""
+    };
 
 	$scope.basket = [];
 	$scope.users = [];
@@ -95,7 +105,7 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 	}
 
 	/*
-	 *
+	 * Toggle more info
 	 */
 
 	$scope.toggleMoreInfo = function(item) {
@@ -114,42 +124,72 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 	 * Basket
 	 */
 
-	 $scope.addToBasket = function(item) {
-		 basket.add(item);
-	 }
+	$scope.addToBasket = function(item) {
+		basket.add(item);
+	}
 
-	 $scope.incrementValue = function(item) {
-		 item.amount+1;
-	 }
+	$scope.incrementValue = function(item) {
+		item.amount+1;
+	}
 
-	 $scope.decrementValue = function(item) {
-		 if(item.amount > 1) {
- 		 	item.amount-1;
-		 }
-	 }
+	$scope.decrementValue = function(item) {
+		if(item.amount > 1) {
+ 			item.amount-1;
+		}
+	}
 
-	 /*
-	  * Add custom item
-		*/
+	$scope.incrementValue = function(commodity) {
+		commodity.amount+1;
+	}
 
-	 $scope.toggleCustomItem = function() {
-		 if($scope.customItem) {
-			 $scope.askCustomItem = true;
-			 $scope.customItem = false;
-		 } else {
-			 $scope.customItem = true;
-			 $scope.askCustomItem = false;
-		 }
-	 }
+	$scope.decrementValue = function(commodity) {
+		if(item.amount > 1) {
+ 			commodity.amount-1;
+		}
+	}
 
-	 $scope.closeCustomItem = function() {
-		 $scope.customItem = false;
-		 $scope.askCustomItem = true;
-	 }
+	/*
+	 * Add costume commodity
+	 */
+	
+	$scope.addCCToBasket = function() {
+		basket.add($scope.newCommodityForm);
+	}
 
-	 /*
-	 	* Users
-		*/
+	$scope.toggleCustomCommodity = function() {
+		if($scope.customItem) {
+			$scope.addCustomCommodity = true;
+			$scope.customCommodity = false;
+		} else {
+			$scope.addCustomCommodity = false;
+			$scope.customCommodity = true;
+		}
+	}
+
+	$scope.closeCustomCommodity	 = function() {
+		$scope.addCustomCommodity = true;
+		$scope.customCommodity = false;
+	}
+
+	/*
+	 * Checkout
+	 */
+	
+	$scope.confirmOrder = function() {
+		$scope.chooseDepPer = false;
+		$scope.confirm = true;
+	}
+
+	$scope.backToThePast = function () {
+		$scope.chooseDepPer = true;
+		$scope.confirm = false;
+	}
+
+	$scope.checkoutOrder = function() {
+		$scope.chooseDepPer = true;
+		$scope.confirm = false;
+	}
+
 
 
 

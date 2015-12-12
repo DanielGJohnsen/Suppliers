@@ -2,58 +2,68 @@
 
 <html ng-app="suppliers">
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <link type="text/css" rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
-  <link type="text/css" rel="stylesheet" href="assets/lib/css/font-awesome.min.css">
-  <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<link type="text/css" rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="assets/lib/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="assets/css/style.css">
 
 
-  <title>Suppliers</title>
-</head>
-  <body>
-    <div ng-controller="suppliersController" ng-init="init()">
-      <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">Suppliers</a>
-        </div>
-      </nav>
+		<title>Suppliers</title>
+	</head>
+	<body>
+		<div ng-controller="suppliersController" ng-init="init()">
+			<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<a class="navbar-brand" href="#">Suppliers</a>
+			</div>
+			</nav>
 
-      <div class="container">
+			<div class="container">
 
-        <ng-include src="'views/customCommodity.html'"></ng-include>
+				<div class="row">
+					<div class="col-xs-12 col-sm-9">
+						<ng-include src="'views/customCommodity.html'"></ng-include>
 
-        <div class="row">
-          <div class="col-xs-12 col-sm-3">
-            <ng-include src="'views/categories.html'"></ng-include>
-          </div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-3">
+								<ng-include src="'views/categories.html'"></ng-include>
+							</div>
 
-          <div class="col-xs-12 col-sm-6">
-            <ng-include src="'views/content.html'"></ng-include>
-        	</div>
+							<div class="col-xs-12 col-sm-6">
+								<ng-include src="'views/content.html'"></ng-include>
+							</div>
+						</div>
 
-          <div class="col-xs-12 col-sm-3">
-            <ng-include src="'views/basket.html'"></ng-include>
-          </div>
+					</div>
 
-        </div>
-      </div>
-    </div>
+					<div class="col-xs-12 col-sm-3">
+						<ng-include src="'views/basket.html'"></ng-include>
+					</div>
 
-  </body>
+				</div>
 
-  <script type="text/javascript" src="assets/lib/js/jquery-1.11.3.js"></script>
-  <script type="text/javascript" src="assets/lib/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/lib/js/angular.min.js"></script>
-  <script type="text/javascript" src="assets/lib/js/angular-cookies.js"></script>
-  <script type="text/javascript" src="assets/lib/js/angular-mocks.js"></script>
+			</div> 
 
-  <script type="text/javascript" src="assets/js/app.js"></script>
-  <script type="text/javascript" src="assets/js/basket.js"></script>
-  <script type="text/javascript" src="assets/js/users.js"></script>
-  <script type="text/javascript" src="assets/js/suppliersController.js"></script>
-  <script type="text/javascript" src="assets/js/basketController.js"></script>
+			<ng-include src="'views/checkoutModal.html'"></ng-include>
+		</div>
+
+		
+
+	</body>
+
+	<script type="text/javascript" src="assets/lib/js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="assets/lib/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/lib/js/angular.min.js"></script>
+	<script type="text/javascript" src="assets/lib/js/angular-cookies.js"></script>
+	<script type="text/javascript" src="assets/lib/js/angular-mocks.js"></script>
+
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<script type="text/javascript" src="assets/js/basket.js"></script>
+	<script type="text/javascript" src="assets/js/users.js"></script>
+	<script type="text/javascript" src="assets/js/suppliersController.js"></script>
+	<script type="text/javascript" src="assets/js/basketController.js"></script>
 
 </html>

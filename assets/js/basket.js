@@ -8,7 +8,7 @@ app.factory('basket', function($cookies, $http) {
       }
       var isNew = true;
       basket.forEach(function(item) {
-        if(newItem.id == item.id) {
+        if(newItem.name == item.name) {
           item.amount = item.amount + newItem.amount;
           isNew = false;
         }
