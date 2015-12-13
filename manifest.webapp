@@ -1,10 +1,12 @@
 {
-  "version": "0.2.7",
+  "version": "1.0.0",
   "name": "LMIS",
   "description": "Logistics Managment and Information System",
   "launch_path": "index.html",
   "icons":{
-
+    "16": "assets/img/icons/lmis-16.png",
+    "48": "assets//img/icons/lmis-48.png",
+    "128": "assets//img/icons/lmis-128.png"
   },
   "developer":{
     "name": "Suppliers"

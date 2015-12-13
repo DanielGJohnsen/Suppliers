@@ -57,7 +57,6 @@ app.factory('basket', function($cookies, $http) {
     },
 
     clear: function () {
-      console.log("clear");
       basket = [];
       $cookies.putObject('basket', basket);
       

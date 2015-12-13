@@ -1,13 +1,19 @@
 <div>
   <div ng-show="addCustomCommodity">
-    <button type="button" class="btn btn-primary btn-block" ng-click="toggleCustomCommodity()" >Show, add custom commodity</button>
+    <h4>
+      Custom commodity
+      <a href="" ng-click="toggleCustomCommodity()">Show</a>
+    </h4>
   </div>
   <div ng-show="customCommodity">
-    <button type="button" class="btn btn-default btn-block" ng-click="closeCustomCommodity()">Hide, add custom commodity</button>
+    <h4> 
+      Custom commodity
+      <a href="" ng-click="closeCustomCommodity()">Hide</a>
+    </h4>
   </div>
 
   <div ng-show="customCommodity">
-    <h4>Costum commodity</h4>
+
     <div class="panel panel-default" >
       <div class="panel-body">
         <form role="form" name="newCommodityForm">

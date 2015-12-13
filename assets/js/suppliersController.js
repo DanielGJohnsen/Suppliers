@@ -25,27 +25,7 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
         name: "",
         amount: 1
     };
-
-	$scope.users = [];
-	$scope.userGroups = [];
-
-	/*
-	 * Load data
-	 */
-
-	$scope.init = function () {
-		users.getAllUsers(function (data) {
-			$scope.users = data.users;
-		});
-
-		users.getAllUserGroups(function (data) {
-			console.log(data);
-			$scope.userGroups = data.userGroups;
-		});
-	}
-
-
-
+    
 	/*
 	 * Change categories
 	 */

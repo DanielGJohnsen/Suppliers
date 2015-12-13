@@ -1,11 +1,21 @@
-app.controller('basketController', function ($http, $scope, $filter, basket) {
+app.controller('basketController', function ($http, $scope, $filter, basket, users) {
+
+	$scope.basket = basket.get();
+	
+	$scope.receiver = {};
+	$scope.users = [];
 
 	$scope.chooseReceiver = true;
 	$scope.confirm = false;
-
-	$scope.receiver = {};
-
-	$scope.basket = basket.get();
+	
+	/*
+	 * Load data
+	 */
+	$scope.init = function () {
+		users.getAllUsers(function (data) {
+			$scope.users = data.users;
+		});
+	}
 
 	$scope.decrementInBasket = function (commodity) {
 		basket.decrement(commodity, 1);
@@ -48,23 +58,18 @@ app.controller('basketController', function ($http, $scope, $filter, basket) {
 			" unit" + (commodity.amount > 1 ? "s" : "") + "\n";
 		});
 
-		if (window.location.host === "play.dhis2.org") {
-			$http.post('https://play.dhis2.org/demo/api/messageConversations', {
-				"subject": "Commodity order form submitted (" + date + ")",
-				"text": commodities,
-				"users": [{"id": $scope.receiver.id}]
-			}).
-			success(function (data) {
-				basket.clear();
-			});
-		} else {
-			console.log("Would have POSTed this:", {
-				"subject": "Commodity order form submitted (" + date + ")",
-				"text": commodities,
-				"users": [{"id": $scope.receiver.id}]
-			});
+		$http.post('https://play.dhis2.org/demo/api/messageConversations', {
+			"subject": "Commodity order form submitted (" + date + ")",
+			"text": commodities,
+			"users": [{"id": $scope.receiver.id}]
+		}).
+		success(function (data) {
 			basket.clear();
-		}
-
+			$scope.basket = basket.get();
+			$('#checkoutModal').modal('hide');
+		}).
+		error(function () {
+			console.log("Somthing went wrong");
+		});
 	};
 });

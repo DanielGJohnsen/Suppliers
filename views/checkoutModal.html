@@ -7,34 +7,7 @@
 			</div>
 			<div class="modal-body">
 				<div ng-show="chooseReceiver">
-					<form ng-submit="$event.preventDefault()">
-						<div class="form-group">
-							<md-autocomplete
-								md-selected-item="ctrl.selectedItem"
-								md-search-text="ctrl.searchText"
-								md-items="item in ctrl.querySearch(ctrl.searchText)"
-								md-item-text="item.display"
-								md-min-length="0"
-								placeholder="Choose the person you waht to send to">
-								<md-item-template>
-									<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-								</md-item-template>
-								<md-not-found>
-									No states matching "{{ctrl.searchText}}" were found.
-								</md-not-found>
-							</md-autocomplete>
-						</div>
-					</form>
 					<form >
-						<div class="form-group">
-							<label for="chooseDepartment">You can limit the user list by choosing user group</label>
-							<select class="form-control">
-								<option></option>
-								<option ng-repeat="userGroup in userGroups">
-									{{userGroup.name}}
-								</option>
-							</select>
-						</div>
 						<div class="form-group">
 							<label for="choosePerson">Choose the person you want to send to</label>
 							<select class="form-control" ng-model="$parent.receiver" ng-options="user.name for user in users">
