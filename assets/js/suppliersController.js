@@ -1,12 +1,9 @@
-app.controller('suppliersController', function ($scope, $http, $timeout, basket, users) {
+app.controller('suppliersController', function ($scope, $http, $timeout, basket, users, commodities, categories) {
 
 	$scope.activeCategory = 0;
 
 	$scope.customCommodity = true;
 	$scope.addCustomCommodity = false;
-
-	$scope.chooseDepPer = true;
-	$scope.confirm = false;
 
 	$scope.showCategories = true;
 	$scope.hideCategories = false;
@@ -16,20 +13,21 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 
 	$scope.moreInfo = false;
 
-	$scope.categories = [];
+	var allCommodities = commodities;
+	$scope.commodities = commodities;
+	$scope.commodities.forEach(function (commodities) {
+		commodities.amount = 1;
+	});
 
-	var allItems = [];
-	$scope.items = [];
-
-	$scope.commodity = [];
+	$scope.categories = categories;
 
 	$scope.newCommodityForm = {
-        Name: "",
-        Amount: ""
+        name: "",
+        amount: 1
     };
 
-	$scope.basket = [];
 	$scope.users = [];
+	$scope.userGroups = [];
 
 	/*
 	 * Load data
@@ -37,40 +35,15 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 
 	$scope.init = function () {
 		users.getAllUsers(function (data) {
-			console.log(data);
 			$scope.users = data.users;
 		});
 
-		/*
-		$http.get('https://play.dhis2.org/demo/api/users')
-		 .success(function (data) {
-			 console.log("success", data);
-		 })
-		 .error(function (data) {
-			 console.log("fail", data);
-		 });
-
-		$http.get('/api/category').
-			success(function (data, status, headers, config) {
-				$scope.categories = data;
-			}).
-				error(function (data, status, headers, config) {
-				console.log("Somthing went wrong");
-			});
-
-		$http.get('/api/item').
-			success(function (data, status, headers, config) {
-				data.forEach(function(item) {
-					item.amount = 1;
-				});
-				allItems = data;
-				$scope.items = data;
-			}).
-				error(function (data, status, headers, config) {
-				console.log("Somthing went wrong");
+		users.getAllUserGroups(function (data) {
+			console.log(data);
+			$scope.userGroups = data.userGroups;
 		});
-*/
-	};
+	}
+
 
 
 	/*
@@ -92,13 +65,13 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 		$scope.activeCategory = id;
 
 		if(id == 0) {
-			$scope.items = allItems;
+			$scope.commodities = allCommodities;
 		} else {
-			$scope.items = [];
+			$scope.commodities = [];
 
-			for(var i = 0; i < allItems.length; i++) {
-				if(allItems[i].category_id == id) {
-					$scope.items.push(allItems[i]);
+			for(var i = 0; i < allCommodities.length; i++) {
+				if(allCommodities[i].category_id == id) {
+					$scope.commodities.push(allCommodities[i]);
 				}
 			}
 		}
@@ -108,7 +81,7 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 	 * Toggle more info
 	 */
 
-	$scope.toggleMoreInfo = function(item) {
+	$scope.toggleMoreInfo = function(commodity) {
 		if($scope.showMoreInfo) {
 			$scope.showMoreInfo = false;
 			$scope.hideMoreInfo = true;
@@ -124,40 +97,32 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 	 * Basket
 	 */
 
-	$scope.addToBasket = function(item) {
-		basket.add(item);
-	}
-
-	$scope.incrementValue = function(item) {
-		item.amount+1;
-	}
-
-	$scope.decrementValue = function(item) {
-		if(item.amount > 1) {
- 			item.amount-1;
-		}
+	$scope.addToBasket = function(commodity) {
+		commodity.amount = parseInt(commodity.amount);
+		basket.add(commodity);
 	}
 
 	$scope.incrementValue = function(commodity) {
-		commodity.amount+1;
+		commodity.amount++;
 	}
 
 	$scope.decrementValue = function(commodity) {
-		if(item.amount > 1) {
- 			commodity.amount-1;
+		if(commodity.amount > 1) {
+ 			commodity.amount--;
 		}
-	}
+	}	
 
 	/*
 	 * Add costume commodity
 	 */
 	
-	$scope.addCCToBasket = function() {
+	$scope.addCustomCommodityToBasket = function() {
+		$scope.newCommodityForm.amount = parseInt($scope.newCommodityForm.amount);
 		basket.add($scope.newCommodityForm);
 	}
 
 	$scope.toggleCustomCommodity = function() {
-		if($scope.customItem) {
+		if($scope.customCommodity) {
 			$scope.addCustomCommodity = true;
 			$scope.customCommodity = false;
 		} else {
@@ -170,29 +135,5 @@ app.controller('suppliersController', function ($scope, $http, $timeout, basket,
 		$scope.addCustomCommodity = true;
 		$scope.customCommodity = false;
 	}
-
-	/*
-	 * Checkout
-	 */
-	
-	$scope.confirmOrder = function() {
-		$scope.chooseDepPer = false;
-		$scope.confirm = true;
-	}
-
-	$scope.backToThePast = function () {
-		$scope.chooseDepPer = true;
-		$scope.confirm = false;
-	}
-
-	$scope.checkoutOrder = function() {
-		$scope.chooseDepPer = true;
-		$scope.confirm = false;
-	}
-
-
-
-
-
 
 });

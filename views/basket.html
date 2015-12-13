@@ -12,18 +12,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="item in basket">
-            <td>{{item.name}}</td>
-            <td>{{item.amount}}</td>
+          <tr ng-repeat="commodity in basket">
+            <td>{{commodity.name}}</td>
+            <td>{{commodity.amount}}</td>
             <td>
-              <span class="glyphicon glyphicon-minus-sign pointer" aria-hidden="true" ng-click="decrementInBasket(item.id)"></span>
-            <span class="glyphicon glyphicon-plus-sign pointer" aria-hidden="true" ng-click="incrementInBasket(item.id)"></span>
+              <span class="glyphicon glyphicon-minus-sign pointer" aria-hidden="true" ng-click="decrementInBasket(commodity)"></span>
+              <span class="glyphicon glyphicon-plus-sign pointer" aria-hidden="true" ng-click="incrementInBasket(commodity)"></span>
             </td>
-            <td><span class="glyphicon glyphicon-remove-sign pointer" aria-hidden="true" ng-click="removeFromBasket(item.id)"></span></td>
+            <td>
+              <span class="glyphicon glyphicon-remove-sign pointer" aria-hidden="true" ng-click="removeFromBasket(commodity)"></span>
+            </td>
           </tr>
         </tbody>
       </table>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkoutModal">Order commodities</button>
     </div>
   </div>
+
+  <ng-include src="'views/checkoutModal.html'"></ng-include>
 </div>

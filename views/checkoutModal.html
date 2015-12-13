@@ -2,47 +2,62 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 				<h4 class="modal-title" id="checkoutModal">Checkout</h4>
 			</div>
 			<div class="modal-body">
-				<div ng-show="chooseDepPer">
-					<form>
+				<div ng-show="chooseReceiver">
+					<form ng-submit="$event.preventDefault()">
 						<div class="form-group">
-							<label for="chooseDepartment">Choose the department you waht to send to</label>
+							<md-autocomplete
+								md-selected-item="ctrl.selectedItem"
+								md-search-text="ctrl.searchText"
+								md-items="item in ctrl.querySearch(ctrl.searchText)"
+								md-item-text="item.display"
+								md-min-length="0"
+								placeholder="Choose the person you waht to send to">
+								<md-item-template>
+									<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+								</md-item-template>
+								<md-not-found>
+									No states matching "{{ctrl.searchText}}" were found.
+								</md-not-found>
+							</md-autocomplete>
+						</div>
+					</form>
+					<form >
+						<div class="form-group">
+							<label for="chooseDepartment">You can limit the user list by choosing user group</label>
 							<select class="form-control">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+								<option></option>
+								<option ng-repeat="userGroup in userGroups">
+									{{userGroup.name}}
+								</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="choosePerson">Choose the person you waht to send to</label>
-							<select class="form-control">
-								<option ng-repeat="user in users">
-									{{user.name}}
-								</option>
+							<label for="choosePerson">Choose the person you want to send to</label>
+							<select class="form-control" ng-model="$parent.receiver" ng-options="user.name for user in users">
 							</select>
 						</div>
 					</form>
 				</div>
 				<div ng-show="confirm">
-					You will send a message for the order of this commodities:<br />
-					-- List of commodities --<br />
-					<br />
-					To: <br />
-					-- Name of department and person -- <br />
-					<br />
-
+					<p>You will send a message for the order of this commodities:</p>
+					<p>
+						<span ng-repeat="commodity in basket">
+							{{commodity.name}}: {{commodity.amount}}
+							<br />
+						</span>
+					</p>
+					<p>To: {{$parent.receiver.name}}</p>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button ng-show="chooseDepPer" type="button" ng-click="confirmOrder()" class="btn btn-primary">Next</button>
+				<button ng-show="chooseReceiver" type="button" ng-click="confirmOrder()" class="btn btn-primary">Next</button>
 				<button ng-show="confirm" type="button" ng-click="backToThePast()" class="btn btn-primary">Back</button>
-				<button ng-show="confirm" type="button" ng-click="checkoutOrder()" class="btn btn-success">Send order</button>
+				<button ng-show="confirm" type="button" ng-click="checkout()" class="btn btn-success">Send order</button>
 			</div>
 		</div>
 	</div>

@@ -1,30 +1,30 @@
 <div>
   <div ng-show="addCustomCommodity">
-    <button type="button" class="btn btn-primary btn-block" ng-click="toggleCustomCommodity()" >Show, add custom item</button>
+    <button type="button" class="btn btn-primary btn-block" ng-click="toggleCustomCommodity()" >Show, add custom commodity</button>
   </div>
   <div ng-show="customCommodity">
-    <button type="button" class="btn btn-default btn-block" ng-click="closeCustomCommodity()">Hide, add custom item</button>
+    <button type="button" class="btn btn-default btn-block" ng-click="closeCustomCommodity()">Hide, add custom commodity</button>
   </div>
 
   <div ng-show="customCommodity">
-    <h4>Costume commodity</h4>
+    <h4>Costum commodity</h4>
     <div class="panel panel-default" >
       <div class="panel-body">
         <form role="form" name="newCommodityForm">
           <div class="form-group">
-            <label for="itemCode">Commodity name</label>
-            <input type="text" class="form-control" placeholder="Commodity name" ng-model="newCommodityForm.name" />
+            <label for="commodityName">Name</label>
+            <input type="text" class="form-control" placeholder="E.g. Cookie" ng-model="$parent.newCommodityForm.name" />
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-4">
               <div class="input-group">
                 <div class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="decrementCCValue(commodity)">-</button>
+                  <button class="btn btn-default" type="button" ng-click="decrementValue($parent.newCommodityForm)">-</button>
                 </div>
-                <input type="text" class="form-control" ng-model="newCommodityForm.amount" placeholder="Amount" value="1" />
+                <input type="text" class="form-control" ng-model="$parent.newCommodityForm.amount" value="1" />
                 <div class="input-group-btn">
-                  <button class="btn btn-default" type="button" ng-click="incrementCCValue(commodity)" >+</button>
-                  <button class="btn btn-default" ng-click="addCCToBasket()" type="button">Add to basket</button>
+                  <button class="btn btn-default" type="button" ng-click="incrementValue($parent.newCommodityForm)" >+</button>
+                  <button class="btn btn-default" ng-click="addCustomCommodityToBasket()" type="button">Add to basket</button>
                 </div>
               </div>
             </div>
